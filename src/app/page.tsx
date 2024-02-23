@@ -1,3 +1,4 @@
+import { UserButton, auth, currentUser } from "@clerk/nextjs";
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 
@@ -45,11 +46,27 @@ export default async function Home() {
         </div>
 
         <CrudShowcase />
+        <div>
+          <UserButton />
+        </div>
+
+        <div>
+          <UserInfo />
+        </div>
       </div>
     </main>
   );
 }
 
+async function UserInfo() {
+  const user = await currentUser();
+  console.log(user);
+  return (
+    <div>
+    Hello, {user?.firstName} your id is: {user?.id}
+  </div>
+  )
+}
 async function CrudShowcase() {
   const latestPost = await api.post.getLatest.query();
 
