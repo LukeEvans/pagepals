@@ -63,10 +63,11 @@ async function UserInfo() {
   console.log(user);
   return (
     <div>
-    Hello, {user?.firstName} your id is: {user?.id}
-  </div>
-  )
+      Hello, {user?.firstName} your id is: {user?.id}
+    </div>
+  );
 }
+
 async function CrudShowcase() {
   const latestPost = await api.post.getLatest.query();
 
