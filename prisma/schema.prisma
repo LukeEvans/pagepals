@@ -18,3 +18,37 @@ model Post {
 
     @@index([name])
 }
+
+model Book {
+  id          Int      @id @default(autoincrement())
+  image       String
+  description String
+  author      String
+  publishDate DateTime
+  users       UserBook[] @relation("BooksToUsers")
+  reviews     Review[]    @relation("BookReviews")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  books    UserBook[] @relation("BooksToUsers")
+  reviews  Review[]  @relation("UserReviews")
+}
+
+model UserBook {
+  userId Int
+  bookId Int
+  book   Book @relation(fields: [bookId], references: [id], name: "BooksToUsers")
+  user   User @relation(fields: [userId], references: [id], name: "BooksToUsers")
+  @@id([userId, bookId])
+}
+
+model Review {
+  id            Int      @id @default(autoincrement())
+  rating_emoji  String
+  finishedAt    DateTime
+  bookId        Int
+  userId        Int
+  book          Book @relation(fields: [bookId], references: [id], name: "BookReviews")
+  user          User @relation(fields: [userId], references: [id], name: "UserReviews")
+}

@@ -80,6 +80,7 @@ async function CrudShowcase() {
       )}
 
       <CreatePost />
+      <UserInfo />
     </div>
   );
 }
