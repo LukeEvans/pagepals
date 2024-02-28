@@ -5,5 +5,5 @@ export const config = {
 };
 
 export default authMiddleware({
-  publicRoutes: ["/", "/my_books"],
+  publicRoutes: ["/", "/my_books", "/api/trpc/book.search"],
 });

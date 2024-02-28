@@ -1,3 +1,4 @@
+import { BookSearch } from "../_components/book-search";
 import {
   Card,
   CardContent,
@@ -12,6 +13,9 @@ export default async function MyBooks() {
     <div className="bg-slate-50">
       <div className="container flex h-screen w-full flex-col gap-8 pt-8">
         <div className="text-center text-5xl font-semibold">My Bookshelf</div>
+        <div className="w-96 self-center">
+          <BookSearch />
+        </div>
         <div className="grid grid-cols-4 gap-4 sm:grid-cols-1 md:grid-cols-3">
           <Card>
             <CardHeader>
