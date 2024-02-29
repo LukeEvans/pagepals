@@ -10,7 +10,7 @@ import {
 
 export default async function MyBooks() {
   return (
-    <div className="bg-slate-50">
+    <div>
       <div className="container flex h-screen w-full flex-col gap-8 pt-8">
         <div className="text-center text-5xl font-semibold">My Bookshelf</div>
         <div className="w-96 self-center">
