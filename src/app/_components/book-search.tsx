@@ -7,14 +7,14 @@ import Image from "next/image";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
 
+// TODO Add debounce
 export function BookSearch() {
-  const [name, setName] = useState("");
-  const [focus, setFocus] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data: books } = api.book.search.useQuery(
-    { name },
+    { searchTerm },
     {
-      enabled: name.length > 2,
+      enabled: searchTerm.length > 2,
     },
   );
 
@@ -28,39 +28,35 @@ export function BookSearch() {
       >
         <Input
           placeholder="Find your next book"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onFocus={() => {
-            console.log("focus!");
-            setFocus(false);
-          }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      {books?.results && (
-        <div className="absolute z-10 w-full rounded-md pt-1 shadow-lg">
+      {books && (
+        <div className="absolute z-10 w-full rounded-md pt-2 shadow-lg">
           <ScrollArea className="rounded-md bg-white pb-1">
             <div className="">
-              {books.results.map((book, index) => (
+              {books.map((book, index) => (
                 <>
                   <div
                     key={book.id}
                     className="flex gap-4 text-sm hover:bg-slate-200"
                   >
+                    {/* Show an image not found if no imageUrl */}
                     <Image
                       className="h-100 w-10"
-                      width={0}
-                      height={0}
+                      width={100}
+                      height={1000}
                       src={book.imageUrl}
                       alt={book.title}
                     />
+                    {/* Show a truncated title and author*/}
                     <div className="flex flex-col justify-center gap-1">
                       <div className="text-xl">{book.title}</div>
                       <div className="text-sm text-gray-600">{book.author}</div>
                     </div>
                   </div>
-                  {index !== books.results.length - 1 && (
-                    <Separator className="my-1" />
-                  )}
+                  {index !== books.length - 1 && <Separator className="my-1" />}
                 </>
               ))}
             </div>
