@@ -42,7 +42,7 @@ export function BookSearch() {
                     key={book.id}
                     className="flex gap-4 text-sm hover:bg-slate-200"
                   >
-                    {/* Show an image not found if no imageUrl */}
+                    {/* TODO Show an image not found if no imageUrl */}
                     <Image
                       className="h-100 w-10"
                       width={100}
@@ -50,7 +50,7 @@ export function BookSearch() {
                       src={book.imageUrl}
                       alt={book.title}
                     />
-                    {/* Show a truncated title and author*/}
+                    {/* TODO Show a truncated title and author*/}
                     <div className="flex flex-col justify-center gap-1">
                       <div className="text-xl">{book.title}</div>
                       <div className="text-sm text-gray-600">{book.author}</div>
