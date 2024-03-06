@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
-
 import { api } from "~/trpc/react";
 import { Input } from "./ui/input";
 import Image from "next/image";
@@ -15,13 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-
-type Book = {
-  id: string;
-  title: string;
-  author: string;
-  imageUrl?: string;
-};
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 export function BookSearch() {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -34,13 +27,20 @@ export function BookSearch() {
     },
   );
 
+  // const addBookToLibraryMutation = api.book.addBookToLibrary.useMutation();
+
+  const handleAddBook = (bookId: string) => {
+    // addBookToLibraryMutation.mutate({ bookId });
+    console.log("BookId: ", bookId);
+  };
+
   return (
     <div className="relative">
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className="flex flex-col gap-2"
+        className="flex w-full flex-col gap-2"
       >
         <Input
           placeholder="Find your next book"
@@ -51,12 +51,12 @@ export function BookSearch() {
         <div className="absolute z-10 w-full rounded-md pt-2 shadow-lg">
           <ScrollArea className="rounded-md bg-white pb-1">
             <div className="">
-              {books.map((book: Book, index: number) => (
+              {books.map((book, index: number) => (
                 <React.Fragment key={book.id}>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <div className="flex gap-4 text-sm hover:bg-slate-200">
+                        <div className="group flex items-center gap-4 text-sm hover:bg-slate-200">
                           {book.imageUrl ? (
                             <Image
                               className="h-100 w-10"
@@ -72,12 +72,19 @@ export function BookSearch() {
                           )}
                           <div className="flex flex-col justify-center gap-1">
                             <div className="text-xl">
-                              {truncateText(book.title, 30)}
+                              {truncateText(book.title, 25)}
                             </div>
                             <div className="text-sm text-gray-600">
-                              {truncateText(book.author, 20)}
+                              {truncateText(book.author, 30)}
                             </div>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleAddBook(book.id)}
+                            className="ml-auto rounded-full p-2 opacity-0 transition-opacity duration-200 hover:bg-gray-200 focus:outline-none group-hover:opacity-100"
+                          >
+                            <PlusIcon className="h-5 w-5 text-gray-400" />
+                          </button>
                         </div>
                       </TooltipTrigger>
                       <TooltipContent>

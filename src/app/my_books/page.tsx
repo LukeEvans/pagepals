@@ -13,10 +13,10 @@ export default async function MyBooks() {
     <div>
       <div className="container flex h-screen w-full flex-col gap-8 pt-8">
         <div className="text-center text-5xl font-semibold">My Bookshelf</div>
-        <div className="w-96 self-center">
+        <div className="w-full self-center">
           <BookSearch />
         </div>
-        <div className="grid grid-cols-4 gap-4 sm:grid-cols-1 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 ">
           <Card>
             <CardHeader>
               <CardTitle>Card Title</CardTitle>
